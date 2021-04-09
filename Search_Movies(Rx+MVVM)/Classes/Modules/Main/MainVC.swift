@@ -6,12 +6,18 @@
 //
 
 import UIKit
+import RxSwift
 
 class MainVC: BaseViewController {
-
+    
+    var viewModel: MainViewModel = MainViewModel()
+    
+    // MARK: Properties
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
 }
 
