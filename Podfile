@@ -6,6 +6,10 @@ target 'Search_Movies(Rx+MVVM)' do
   use_frameworks!
 
   # Pods for Search_Movies(Rx+MVVM)
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  
+  
 
   target 'Search_Movies(Rx+MVVM)Tests' do
     inherit! :search_paths
