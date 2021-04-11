@@ -11,6 +11,18 @@ class BaseNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let searchController: UISearchController = {
 
+           let searchController = UISearchController(searchResultsController: nil)
+           searchController.searchBar.placeholder = "New Search"
+           searchController.searchBar.searchBarStyle = .minimal
+           searchController.dimsBackgroundDuringPresentation = false
+           searchController.definesPresentationContext = true
+
+          return searchController
+       }()
+        
+        navigationItem.searchController = searchController
     }
 }

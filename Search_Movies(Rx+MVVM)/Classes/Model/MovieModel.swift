@@ -28,6 +28,17 @@ struct MovieModel : Codable {
         case actor = "actor"
         case userRating = "userRating"
     }
+    
+    init(title: String) {
+        self.title = title
+        self.link = "link"
+        self.image = "image"
+        self.subtitle = "subtitle"
+        self.pubDate = "pubDate"
+        self.director = "director"
+        self.actor = "actor"
+        self.userRating = "userRating"
+    }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)

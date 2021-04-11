@@ -9,9 +9,17 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
+    let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "영화제목 검색"
+        return searchController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+//        navigationItem.hidesSearchBarWhenScrolling = false
+//        navigationController?.navigationBar.prefersLargeTitles = true
+//        navigationItem.searchController = searchController
     }
 }
