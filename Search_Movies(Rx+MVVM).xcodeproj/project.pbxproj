@@ -29,6 +29,7 @@
 		7C3BE0612620A03100604125 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BE0602620A03100604125 /* Network.swift */; };
 		7C3BE0672620A05B00604125 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BE0662620A05B00604125 /* HTTPMethod.swift */; };
 		7C3BE06C2620A06500604125 /* HTTPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BE06B2620A06500604125 /* HTTPStatus.swift */; };
+		7C3BE0722620A2F900604125 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BE0712620A2F900604125 /* Log.swift */; };
 		A2E2B5B6353058AE7F278523 /* Pods_Search_Movies_Rx_MVVM__Search_Movies_Rx_MVVM_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D9DE03E1982022E6B17CF /* Pods_Search_Movies_Rx_MVVM__Search_Movies_Rx_MVVM_UITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		7C3BE0602620A03100604125 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		7C3BE0662620A05B00604125 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		7C3BE06B2620A06500604125 /* HTTPStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatus.swift; sourceTree = "<group>"; };
+		7C3BE0712620A2F900604125 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		AFA079637BD1E38CC23E1DF2 /* Pods_Search_Movies_Rx_MVVM_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Search_Movies_Rx_MVVM_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10D9DE03E1982022E6B17CF /* Pods_Search_Movies_Rx_MVVM__Search_Movies_Rx_MVVM_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Search_Movies_Rx_MVVM__Search_Movies_Rx_MVVM_UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4F66A530F1D743AE43A205 /* Pods-Search_Movies(Rx+MVVM).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Search_Movies(Rx+MVVM).debug.xcconfig"; path = "Target Support Files/Pods-Search_Movies(Rx+MVVM)/Pods-Search_Movies(Rx+MVVM).debug.xcconfig"; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				7C3BE0212620971600604125 /* Base */,
 				7C3BE04426209CB400604125 /* ViewModel */,
 				7C3BE05F26209FF500604125 /* Managers */,
+				7C3BE0702620A2EC00604125 /* Utils */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -301,6 +304,14 @@
 				7C3BE06B2620A06500604125 /* HTTPStatus.swift */,
 			);
 			path = HTTP;
+			sourceTree = "<group>";
+		};
+		7C3BE0702620A2EC00604125 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7C3BE0712620A2F900604125 /* Log.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		DE09A1681E7DC5CA4631091F /* Pods */ = {
@@ -560,6 +571,7 @@
 				7C3BE04B26209CCA00604125 /* ViewModel.swift in Sources */,
 				7C241A992619B2A800AB2250 /* MainVC.swift in Sources */,
 				7C3BE05626209EE100604125 /* BaseModel.swift in Sources */,
+				7C3BE0722620A2F900604125 /* Log.swift in Sources */,
 				7C3BE0302620999700604125 /* GenreType.swift in Sources */,
 				7C3BE03526209A4200604125 /* CountryType.swift in Sources */,
 				7C3BE04026209B3A00604125 /* SearchModel.swift in Sources */,
@@ -752,6 +764,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NAVER_CLIENT_ID = mivorrj52o7Y_25Xq5BE;
+				NAVER_CLIENT_SECRET = QMikpc1Tlu;
 				PRODUCT_BUNDLE_IDENTIFIER = com.exponent.seach.movies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -772,6 +786,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NAVER_CLIENT_ID = mivorrj52o7Y_25Xq5BE;
+				NAVER_CLIENT_SECRET = QMikpc1Tlu;
 				PRODUCT_BUNDLE_IDENTIFIER = com.exponent.seach.movies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

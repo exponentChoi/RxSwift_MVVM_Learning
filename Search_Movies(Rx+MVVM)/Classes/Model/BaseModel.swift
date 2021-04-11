@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BaseModel : Codable {
+struct BaseModel<T: Decodable>: Decodable {
     let lastBuildDate : String?
     let total : Int?
     let start : Int?
@@ -30,5 +30,27 @@ struct BaseModel : Codable {
         start = try values.decodeIfPresent(Int.self, forKey: .start)
         display = try values.decodeIfPresent(Int.self, forKey: .display)
         items = try values.decodeIfPresent([MovieModel].self, forKey: .items)
+    }
+}
+
+struct BaseError: Decodable {
+    var code: String
+    var message: String
+    
+    enum CodingKeys: String, CodingKey {
+        case code = "errorCode"
+        case message = "errorMessage"
+    }
+    
+    init(code: String, message: String) {
+        self.code = code
+        self.message = message
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+
+        code = try values.decode(String.self, forKey: .code)
+        message = try values.decode(String.self, forKey: .message)
     }
 }

@@ -18,6 +18,15 @@ class MainVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let params:[String: Any] = ["quer": "starwars"]
+        
+        Network().request(parameters: params,
+                          responseType: MovieModel.self,
+                          successHandler: {
+                            guard let items = $0.items else { return }
+                          }, failureHandler: {
+                            Log.d($0.message)
+                          })
     }
 }
 
