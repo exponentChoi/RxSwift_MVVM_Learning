@@ -14,6 +14,7 @@ class MainViewModel: ViewModelType {
 
     // MARK: - Propertis
     struct Input {
+        let query: String
     }
     
     struct Output {
@@ -23,33 +24,16 @@ class MainViewModel: ViewModelType {
     let movies = BehaviorRelay<[MovieModel]>(value: [])
     
     func transform(req: ViewModel.Input) -> ViewModel.Output {
-        let params:[String: Any] = ["query": "starwars"]
         
-        DispatchQueue.main.async {
-            
-            Network().request(parameters: params,
-                              responseType: MovieModel.self,
-                              successHandler: {
-                                guard let items = $0.items else { return }
-                                self.movies.accept(items)
-                              }, failureHandler: { _ in
-                                
-                              })
-        }
-        return Output(movies: movies)
-    }
-    
-    func testTransform(req: ViewModel.Input) -> ViewModel.Output {
-        let params:[String: Any] = ["query": ""]
+        let params:[String: Any] = ["query": req.query]
         
         Network().request(parameters: params,
                           responseType: MovieModel.self,
                           successHandler: {
                             guard let items = $0.items else { return }
                             self.movies.accept(items)
-                          }, failureHandler: {
-                            Log.d("failed: \($0)")
-                            self.movies.accept([])
+                          }, failureHandler: { _ in
+                            
                           })
         
         return Output(movies: movies)

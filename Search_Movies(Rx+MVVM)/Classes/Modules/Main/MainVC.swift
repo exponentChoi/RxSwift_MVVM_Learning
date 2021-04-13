@@ -28,12 +28,21 @@ class MainVC: BaseViewController {
     private func setNavigationBar() {
         title = "검색"
         let searchController: UISearchController = {
+            
+            let sb = UIStoryboard(name: "SearchHistory", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "SearchHistoryVC")
+            
             let searchController = UISearchController(searchResultsController: nil)
             searchController.searchBar.placeholder = "영화제목 검색"
             searchController.obscuresBackgroundDuringPresentation = false // 검색 시 흐림설정
             searchController.definesPresentationContext = true
             searchController.searchResultsUpdater = self // 입력 시 마당 조회
             searchController.searchBar.delegate = self
+            if #available(iOS 13.0, *) {
+                
+            } else {
+                // Fallback on earlier versions
+            }
             
             return searchController
         }()
@@ -51,19 +60,54 @@ class MainVC: BaseViewController {
             cell.textLabel?.text = data.title
         }.disposed(by: disposeBag)
         
-        _ = viewModel.transform(req: .init())
+        _ = viewModel.transform(req: .init(query: "starwards"))
     }
 }
 
-// MARK: -
+// MARK: - 검색어 자동완성을 위한 준비
 extension MainVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-//        Log.d(searchController.searchBar.text)
+        // Apply the filtered results to the search results table.
+        if let searchHistoryController = searchController.searchResultsController as? SearchHistoryVC {
+            if let histories = myUserDefault.array(forKey: "searchHistories") as? [String] {
+                searchHistoryController.histories.accept(histories)
+            }
+        }
+        
+        _  = viewModel.transform(req: .init(query: searchController.searchBar.text!))
+    }
+    
+}
+
+// MARK: - 검색
+extension MainVC: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        Log.d("searchBarSearchButtonClicked")
+        searchBar.resignFirstResponder()
+        _  = viewModel.transform(req: .init(query: searchBar.text!))
+        
+        if var histories = myUserDefault.array(forKey: "searchHistories") as? [String] {
+            histories.append(searchBar.text!)
+            myUserDefault.setValue(histories, forKey: "searchHistories")
+        } else {
+            myUserDefault.setValue([searchBar.text!], forKey: "searchHistories")
+        }
+        
+        searchBar.showsScopeBar = false
+    }
+    
+    func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
+        Log.d("searchBarResultsListButtonClicked")
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        Log.d("searchBarBookmarkButtonClicked")
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        
+        
     }
 }
 
-extension MainVC: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        _  = viewModel.testTransform(req: .init())
-    }
-}
+let myUserDefault = UserDefaults.standard
