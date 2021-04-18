@@ -32,17 +32,18 @@ class MainVC: BaseViewController {
         let movieCell = UINib(nibName: "MovieCell", bundle: nil)
         moviesCollectionView.register(movieCell, forCellWithReuseIdentifier: MovieCell.identifier)
         
-        moviesCollectionView.rx.setDelegate(self)
+//        moviesCollectionView.rx.setDelegate(self)
         moviesCollectionView.collectionViewLayout = setCollectionViewLayout()
-        moviesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 1, bottom: 0, right: 1)
+//        moviesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 1, bottom: 0, right: 1)
     }
     
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         let width = UIScreen.main.bounds.width
-        flowLayout.estimatedItemSize = CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
-        flowLayout.minimumLineSpacing = 5 // 위아래 공간
-        flowLayout.minimumInteritemSpacing = 1 // 좌우 공간
+//        flowLayout.estimatedItemSize =  CGSize(width: (width / 3) - 0.4, height: (width / 3) + 40)
+        flowLayout.itemSize = CGSize(width: (width / 3) - 0.4, height: (width / 3) + 40)
+        flowLayout.minimumLineSpacing = 1 // 위아래 공간
+        flowLayout.minimumInteritemSpacing = 0.2 // 좌우 공간
         return flowLayout
     }
     
@@ -93,6 +94,9 @@ class MainVC: BaseViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             }).disposed(by: disposeBag)
         
+//        if let recently_item = myUserDefault.object(forKey: "Recently_Search") as? [MovieModel] {
+//            viewModel.movies.accept(recently_item)
+//        }
         
         _ = viewModel.transform(req: .init(query: "리틀 포레스트"))
     }
@@ -108,7 +112,7 @@ extension MainVC: UISearchResultsUpdating {
             }
         }
         
-        _  = viewModel.transform(req: .init(query: searchController.searchBar.text!))
+//        _  = viewModel.transform(req: .init(query: searchController.searchBar.text!))
     }
     
 }

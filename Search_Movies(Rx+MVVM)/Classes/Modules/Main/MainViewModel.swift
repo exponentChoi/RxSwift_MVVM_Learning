@@ -32,8 +32,7 @@ class MainViewModel: ViewModelType {
                           responseType: MovieModel.self,
                           successHandler: {
                             guard let items = $0.items else { return }
-//                            Log.d(items)
-                            self.movies.accept(items.reversed())
+                            self.movies.accept(items)
                           }, failureHandler: { _ in
                             
                           })

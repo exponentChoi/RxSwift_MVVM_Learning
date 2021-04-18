@@ -12,6 +12,8 @@ import RxSwift
 class MovieDetailVC: UIViewController {
 
     @IBOutlet weak var backgroundPosterImage: UIImageView!
+    
+    @IBOutlet weak var posterView: UIView!
     @IBOutlet weak var posterImage: UIImageView!
     
     
@@ -39,10 +41,10 @@ class MovieDetailVC: UIViewController {
 //        title = movieItem.title
         
 //        navigationController?.navigationBar.barTintColor = .yellow
-        navigationController?.navigationBar.tintColor = .orange
+//        navigationController?.navigationBar.tintColor = .blue
         
-        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.yellow.cgColor]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
+//        let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.yellow.cgColor]
+//        navigationController?.navigationBar.titleTextAttributes = textAttributes
 //        navigationController?.navigationBar.tintColor = UIColor.yellow.cgColor
         
         
@@ -52,6 +54,13 @@ class MovieDetailVC: UIViewController {
     }
     
     private func setupUI() {
+        posterView.layer.borderWidth = 0.5
+        posterView.layer.borderColor = UIColor.lightGray.cgColor
+        posterView.layer.shadowOpacity = 0.7
+        posterView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        posterView.layer.masksToBounds = false
+//        posterImage.clipsToBounds = true
+        
 //        backgroundPosterImage.layer.borderWidth = 0.5
 //        backgroundPosterImage.layer.borderColor = UIColor.lightGray.cgColor
         

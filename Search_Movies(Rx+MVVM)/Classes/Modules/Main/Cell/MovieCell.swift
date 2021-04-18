@@ -12,6 +12,8 @@ class MovieCell: UICollectionViewCell {
     
     static let identifier = String(describing: MovieCell.self)
 
+    
+    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var posterImage: UIImageView!
     
     override func awakeFromNib() {
@@ -21,11 +23,24 @@ class MovieCell: UICollectionViewCell {
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.lightGray.cgColor
         
-        let width = UIScreen.main.bounds.width
-        contentView.frame.size = CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
+        
+//        let width = UIScreen.main.bounds.width
+//        backView.frame.size = CGSize(width: (width / 3) - 0.4, height: (width / 3) + 20)
+//        contentView.frame.size = CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
+//        flowLayout.estimatedItemSize = CGSize(width: (width / 3) - 0.4, height: (width / 3) + 40)
+//        posterImage.frame.size = CGSize(width: (width / 3) - 0.4, height: (width / 3) + 40)
     }
     
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        let width = UIScreen.main.bounds.width
+//        backView.frame.size = CGSize(width: (width / 3) - 0.4, height: (width / 3) + 20)
+//    }
+    
     func setItem(imageURL: String?) {
+//        let width = UIScreen.main.bounds.width
+//        backView.frame.size = CGSize(width: (width / 3) - 0.4, height: (width / 3) + 20)
+//
         if let str = imageURL, let url = URL(string: str) {
             posterImage.kf.setImage(with: url)
         }

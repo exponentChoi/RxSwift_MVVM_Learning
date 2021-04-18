@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,20 +18,33 @@
                 <rect key="frame" x="0.0" y="0.0" width="205" height="190"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mv_noImage" translatesAutoresizingMaskIntoConstraints="NO" id="yJN-mU-YEm">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHw-mf-19s">
                         <rect key="frame" x="0.0" y="0.0" width="205" height="190"/>
-                    </imageView>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mv_noImage" translatesAutoresizingMaskIntoConstraints="NO" id="yJN-mU-YEm">
+                                <rect key="frame" x="0.0" y="0.0" width="205" height="190"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="yJN-mU-YEm" secondAttribute="bottom" id="AIN-gg-8z0"/>
+                            <constraint firstAttribute="trailing" secondItem="yJN-mU-YEm" secondAttribute="trailing" id="Ksw-uM-dYP"/>
+                            <constraint firstItem="yJN-mU-YEm" firstAttribute="leading" secondItem="AHw-mf-19s" secondAttribute="leading" id="V5i-Af-BCJ"/>
+                            <constraint firstItem="yJN-mU-YEm" firstAttribute="top" secondItem="AHw-mf-19s" secondAttribute="top" id="qmq-Vo-Obm"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="yJN-mU-YEm" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="9Zx-qh-wgr"/>
-                <constraint firstAttribute="trailing" secondItem="yJN-mU-YEm" secondAttribute="trailing" id="MYK-FF-Sdy"/>
-                <constraint firstAttribute="bottom" secondItem="yJN-mU-YEm" secondAttribute="bottom" id="Q9N-DS-MHy"/>
-                <constraint firstItem="yJN-mU-YEm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="z6y-dE-4og"/>
+                <constraint firstItem="AHw-mf-19s" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="AoS-bS-k0h"/>
+                <constraint firstItem="AHw-mf-19s" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="E32-vx-Dcf"/>
+                <constraint firstAttribute="bottom" secondItem="AHw-mf-19s" secondAttribute="bottom" id="nTJ-yX-yYD"/>
+                <constraint firstAttribute="trailing" secondItem="AHw-mf-19s" secondAttribute="trailing" id="pAz-2g-m8c"/>
             </constraints>
             <size key="customSize" width="205" height="190"/>
             <connections>
+                <outlet property="backView" destination="AHw-mf-19s" id="Eqx-5v-RrV"/>
                 <outlet property="posterImage" destination="yJN-mU-YEm" id="rnC-F0-Kfd"/>
             </connections>
             <point key="canvasLocation" x="250.00000000000003" y="102.45535714285714"/>
@@ -38,5 +52,8 @@
     </objects>
     <resources>
         <image name="mv_noImage" width="180" height="240"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
