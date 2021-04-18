@@ -22,4 +22,16 @@ class BaseViewController: UIViewController {
 //        navigationController?.navigationBar.prefersLargeTitles = true
 //        navigationItem.searchController = searchController
     }
+    
+    static func instantiate(storyboard: String) -> Self {
+        let uiStoryboard = UIStoryboard(name: storyboard, bundle: nil)
+        
+        // 임의 타입의 값으로부터 생성
+        let identifier = String(describing: self)
+        // 유니코드 UTF-8 문자열로 변환
+        let utf8String = String(utf8String: identifier)
+        
+        // Storyboard 생성 후 Casting
+        return uiStoryboard.instantiateViewController(withIdentifier: utf8String!) as! Self
+    }
 }

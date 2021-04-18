@@ -8,7 +8,7 @@ target 'Search_Movies(Rx+MVVM)' do
   # Pods for Search_Movies(Rx+MVVM)
   pod 'RxSwift'
   pod 'RxCocoa'
-  
+  pod 'Kingfisher', '6.2.1'
   
 
   target 'Search_Movies(Rx+MVVM)Tests' do

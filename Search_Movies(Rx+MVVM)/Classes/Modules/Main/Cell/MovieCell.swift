@@ -2,23 +2,32 @@
 //  MovieCell.swift
 //  Search_Movies(Rx+MVVM)
 //
-//  Created by 최지수 on 2021/04/11.
+//  Created by 최지수 on 2021/04/17.
 //
 
 import UIKit
+import Kingfisher
 
-class MovieCell: UITableViewCell {
+class MovieCell: UICollectionViewCell {
+    
     static let identifier = String(describing: MovieCell.self)
+
+    @IBOutlet weak var posterImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+//        // Initialization code
+        
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
+        
+        let width = UIScreen.main.bounds.width
+        contentView.frame.size = CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func setItem(imageURL: String?) {
+        if let str = imageURL, let url = URL(string: str) {
+            posterImage.kf.setImage(with: url)
+        }
     }
-
 }

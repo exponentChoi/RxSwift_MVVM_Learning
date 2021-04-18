@@ -25,13 +25,15 @@ class MainViewModel: ViewModelType {
     
     func transform(req: ViewModel.Input) -> ViewModel.Output {
         
-        let params:[String: Any] = ["query": req.query]
+        let params:[String: Any] = ["query": req.query,
+                                    "display":100]
         
         Network().request(parameters: params,
                           responseType: MovieModel.self,
                           successHandler: {
                             guard let items = $0.items else { return }
-                            self.movies.accept(items)
+//                            Log.d(items)
+                            self.movies.accept(items.reversed())
                           }, failureHandler: { _ in
                             
                           })

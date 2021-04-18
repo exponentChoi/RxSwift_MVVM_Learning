@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import RxSwift
 
 class Network {
     
     private func getHeader() -> [String: String] {
-        let header = ["X-Naver-Client-Id": "",
-                      "X-Naver-Client-Secret": ""]
+        let header = ["X-Naver-Client-Id": "mivorrj52o7Y_25Xq5BE",
+                      "X-Naver-Client-Secret": "QMikpc1Tlu"]
         return header
     }
     

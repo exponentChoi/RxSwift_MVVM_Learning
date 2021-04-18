@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 class MainVC: BaseViewController {
     
@@ -16,13 +17,33 @@ class MainVC: BaseViewController {
     // MARK: Properties
     let disposeBag = DisposeBag()
     
-    @IBOutlet weak var moviesTableView: UITableView!
+    @IBOutlet weak var moviesCollectionView: UICollectionView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
         setNavigationBar() // todo: 공통으로 변경할 예정
         bindingViewModel()
+    }
+    
+    private func setupUI() {
+        let movieCell = UINib(nibName: "MovieCell", bundle: nil)
+        moviesCollectionView.register(movieCell, forCellWithReuseIdentifier: MovieCell.identifier)
+        
+        moviesCollectionView.rx.setDelegate(self)
+        moviesCollectionView.collectionViewLayout = setCollectionViewLayout()
+        moviesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 1, bottom: 0, right: 1)
+    }
+    
+    private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        let width = UIScreen.main.bounds.width
+        flowLayout.estimatedItemSize = CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
+        flowLayout.minimumLineSpacing = 5 // 위아래 공간
+        flowLayout.minimumInteritemSpacing = 1 // 좌우 공간
+        return flowLayout
     }
     
     private func setNavigationBar() {
@@ -56,11 +77,24 @@ class MainVC: BaseViewController {
     
     // MARK: - Binding
     private func bindingViewModel() {
-        viewModel.movies.bind(to: moviesTableView.rx.items(cellIdentifier: "cell", cellType: MovieCell.self)) { row, data, cell in
-            cell.textLabel?.text = data.title
+        viewModel.movies.bind(to: moviesCollectionView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) {
+            row, data, cell in
+            cell.setItem(imageURL: data.image)
         }.disposed(by: disposeBag)
         
-        _ = viewModel.transform(req: .init(query: "starwards"))
+        moviesCollectionView.rx.modelSelected(MovieModel.self)
+            .subscribe(onNext: { [weak self] data in
+                guard let self = self else { return}
+
+                Log.d("item: \(data)")
+                
+                let vc = MovieDetailVC.instantiate(storyboard: "MovieDetail")
+                vc.movieItem = data
+                self.navigationController?.pushViewController(vc, animated: true)
+            }).disposed(by: disposeBag)
+        
+        
+        _ = viewModel.transform(req: .init(query: "리틀 포레스트"))
     }
 }
 
@@ -105,8 +139,15 @@ extension MainVC: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-        
+    }
+}
+
+
+// MARK: - collectionView Delegate
+extension MainVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = UIScreen.main.bounds.width
+        return CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
     }
 }
 
