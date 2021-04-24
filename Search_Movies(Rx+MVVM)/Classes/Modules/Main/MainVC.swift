@@ -87,8 +87,6 @@ class MainVC: BaseViewController {
             .subscribe(onNext: { [weak self] data in
                 guard let self = self else { return}
 
-                Log.d("item: \(data)")
-                
                 let vc = MovieDetailVC.instantiate(storyboard: "MovieDetail")
                 vc.movieItem = data
                 self.navigationController?.pushViewController(vc, animated: true)
