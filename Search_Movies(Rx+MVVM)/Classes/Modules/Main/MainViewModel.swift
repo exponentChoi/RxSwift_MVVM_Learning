@@ -24,13 +24,14 @@ class MainViewModel: Network, ViewModelType {
     }
     
     let movies = BehaviorRelay<[MovieModel]>(value: [])
+    var query = ""
     
     func transform(req: ViewModel.Input) -> ViewModel.Output {
-        
         let params:[String: Any] = ["query": req.query,
-                                    "display":100]
+                                    "display": 30,
+                                    "start": 1]
         
-        
+        query = req.query
         
         rxRequest(parameters: params, responseType: MovieModel.self)
             .subscribe { result in
@@ -42,6 +43,15 @@ class MainViewModel: Network, ViewModelType {
                     case .success(let reqItem):
                         if let item = reqItem.items {
                             self.movies.accept(item)
+                            
+                            var search_titles = item.compactMap { $0.title?.htmlEscaped }
+                            
+                            if let titles = myUserDefault.array(forKey: Constants.UserDefaults.search_titles) as? [String] {
+                                titles.forEach { search_titles.append($0) }
+                            }
+                            
+                            let setTitles = Set(search_titles).sorted(by: <)
+                            myUserDefault.setValue(Array(setTitles), forKey: Constants.UserDefaults.search_titles)
                         }
                     case .error(let reqError):
                         Log.d("네이버 API 발생!!(\(reqError.code)): \(reqError.message)")

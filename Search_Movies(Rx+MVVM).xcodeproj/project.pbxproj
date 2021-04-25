@@ -33,6 +33,7 @@
 		7C3BE0672620A05B00604125 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BE0662620A05B00604125 /* HTTPMethod.swift */; };
 		7C3BE06C2620A06500604125 /* HTTPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BE06B2620A06500604125 /* HTTPStatus.swift */; };
 		7C3BE0722620A2F900604125 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BE0712620A2F900604125 /* Log.swift */; };
+		7CC38F912635441100868884 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC38F902635441100868884 /* Constants.swift */; };
 		7CE69337262B2EAC0050302A /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE69335262B2EAC0050302A /* MovieCell.swift */; };
 		7CE69338262B2EAC0050302A /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE69336262B2EAC0050302A /* MovieCell.xib */; };
 		7CE6934C262B3E040050302A /* MovieDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE6934B262B3E040050302A /* MovieDetail.storyboard */; };
@@ -97,6 +98,7 @@
 		7C3BE0662620A05B00604125 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		7C3BE06B2620A06500604125 /* HTTPStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatus.swift; sourceTree = "<group>"; };
 		7C3BE0712620A2F900604125 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		7CC38F902635441100868884 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7CE69335262B2EAC0050302A /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		7CE69336262B2EAC0050302A /* MovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 		7CE6934B262B3E040050302A /* MovieDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MovieDetail.storyboard; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				7C3BE0652620A04E00604125 /* HTTP */,
 				7C3BE02F2620999700604125 /* GenreType.swift */,
 				7C3BE03426209A4200604125 /* CountryType.swift */,
+				7CC38F902635441100868884 /* Constants.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CC38F912635441100868884 /* Constants.swift in Sources */,
 				7C3BE0612620A03100604125 /* Network.swift in Sources */,
 				7C3BE05B26209F1700604125 /* MovieModel.swift in Sources */,
 				7C3BE0672620A05B00604125 /* HTTPMethod.swift in Sources */,

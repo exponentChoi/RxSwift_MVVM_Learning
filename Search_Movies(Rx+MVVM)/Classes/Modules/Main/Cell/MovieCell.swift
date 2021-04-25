@@ -22,13 +22,6 @@ class MovieCell: UICollectionViewCell {
         
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.lightGray.cgColor
-        
-        
-//        let width = UIScreen.main.bounds.width
-//        backView.frame.size = CGSize(width: (width / 3) - 0.4, height: (width / 3) + 20)
-//        contentView.frame.size = CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
-//        flowLayout.estimatedItemSize = CGSize(width: (width / 3) - 0.4, height: (width / 3) + 40)
-//        posterImage.frame.size = CGSize(width: (width / 3) - 0.4, height: (width / 3) + 40)
     }
     
 //    override func prepareForReuse() {
@@ -43,6 +36,8 @@ class MovieCell: UICollectionViewCell {
 //
         if let str = imageURL, let url = URL(string: str) {
             posterImage.kf.setImage(with: url)
+        } else {
+            posterImage.image = UIImage(named: "mv_noImage")
         }
     }
 }

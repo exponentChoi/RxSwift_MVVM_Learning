@@ -54,7 +54,7 @@ class MainVC: BaseViewController {
             let sb = UIStoryboard(name: "SearchHistory", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "SearchHistoryVC")
             
-            let searchController = UISearchController(searchResultsController: nil)
+            let searchController = UISearchController(searchResultsController: vc)
             searchController.searchBar.placeholder = "영화제목 검색"
             searchController.obscuresBackgroundDuringPresentation = false // 검색 시 흐림설정
             searchController.definesPresentationContext = true
@@ -78,11 +78,13 @@ class MainVC: BaseViewController {
     
     // MARK: - Binding
     private func bindingViewModel() {
+        // Movie 목록 collectionview binding
         viewModel.movies.bind(to: moviesCollectionView.rx.items(cellIdentifier: MovieCell.identifier, cellType: MovieCell.self)) {
             row, data, cell in
             cell.setItem(imageURL: data.image)
         }.disposed(by: disposeBag)
         
+        // collectionview selected binding
         moviesCollectionView.rx.modelSelected(MovieModel.self)
             .subscribe(onNext: { [weak self] data in
                 guard let self = self else { return}
@@ -91,6 +93,16 @@ class MainVC: BaseViewController {
                 vc.movieItem = data
                 self.navigationController?.pushViewController(vc, animated: true)
             }).disposed(by: disposeBag)
+        
+        // collectionview load more 위한 binding
+        moviesCollectionView.rx.willDisplayCell.subscribe { cell in
+            if let row = cell.element?.at.row, row == self.viewModel.movies.value.count - 10 {
+//                self.viewModel.loadMore(row)
+                Log.d("last index 도달??")
+            }
+        }.disposed(by: disposeBag)
+        
+        
         
 //        if let recently_item = myUserDefault.object(forKey: "Recently_Search") as? [MovieModel] {
 //            viewModel.movies.accept(recently_item)
@@ -103,16 +115,16 @@ class MainVC: BaseViewController {
 // MARK: - 검색어 자동완성을 위한 준비
 extension MainVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+        Log.d("updateSearchResults")
         // Apply the filtered results to the search results table.
         if let searchHistoryController = searchController.searchResultsController as? SearchHistoryVC {
-            if let histories = myUserDefault.array(forKey: "searchHistories") as? [String] {
+            if let histories = myUserDefault.array(forKey: Constants.UserDefaults.search_titles) as? [String] {
                 searchHistoryController.histories.accept(histories)
             }
         }
         
 //        _  = viewModel.transform(req: .init(query: searchController.searchBar.text!))
     }
-    
 }
 
 // MARK: - 검색
@@ -122,14 +134,15 @@ extension MainVC: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         _  = viewModel.transform(req: .init(query: searchBar.text!))
         
-        if var histories = myUserDefault.array(forKey: "searchHistories") as? [String] {
-            histories.append(searchBar.text!)
-            myUserDefault.setValue(histories, forKey: "searchHistories")
-        } else {
-            myUserDefault.setValue([searchBar.text!], forKey: "searchHistories")
-        }
+//        if var histories = myUserDefault.array(forKey: Constants.UserDefaults.search_words) as? [String] {
+//            histories.append(searchBar.text!)
+//            myUserDefault.setValue(histories, forKey: Constants.UserDefaults.search_words)
+//        } else {
+//            myUserDefault.setValue([searchBar.text!], forKey: Constants.UserDefaults.search_words)
+//        }
         
         searchBar.showsScopeBar = false
+        
     }
     
     func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
@@ -152,5 +165,3 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
         return CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
     }
 }
-
-let myUserDefault = UserDefaults.standard

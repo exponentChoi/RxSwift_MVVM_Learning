@@ -31,5 +31,11 @@ class SearchHistoryVC: UIViewController {
         histories.bind(to: tableView.rx.items(cellIdentifier: "cell")) { row, data, cell in
             cell.textLabel?.text = data
         }.disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(String.self)
+            .subscribe { str in
+                self.dismiss(animated: true, completion: nil)
+                Log.d("selected search word: \(str.element)")
+            }.disposed(by: disposeBag)
     }
 }
