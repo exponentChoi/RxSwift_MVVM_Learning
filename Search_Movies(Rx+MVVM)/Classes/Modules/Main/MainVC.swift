@@ -114,6 +114,7 @@ class MainVC: BaseViewController {
 extension MainVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         Log.d("updateSearchResults")
+        
         // Apply the filtered results to the search results table.
         if let searchHistoryController = searchController.searchResultsController as? SearchHistoryVC {
             if let histories = myUserDefault.array(forKey: Constants.UserDefaults.search_titles) as? [String] {
@@ -129,7 +130,9 @@ extension MainVC: UISearchResultsUpdating {
 extension MainVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         Log.d("searchBarSearchButtonClicked")
+        self.navigationItem.searchController?.dismiss(animated: true, completion: nil)
         searchBar.resignFirstResponder()
+        
         _  = viewModel.transform(req: .init(query: searchBar.text!))
         
 //        if var histories = myUserDefault.array(forKey: Constants.UserDefaults.search_words) as? [String] {
@@ -140,7 +143,6 @@ extension MainVC: UISearchBarDelegate {
 //        }
         
         searchBar.showsScopeBar = false
-        
     }
     
     func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
@@ -152,16 +154,13 @@ extension MainVC: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        Log.d("selectedScopeButtonIndexDidChange")
     }
 }
 
 
 // MARK: - collectionView Delegate
 extension MainVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width = UIScreen.main.bounds.width
-//        return CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
-//    }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         guard let row = collectionView.cellForItem(at: indexPath) as? MovieCell else { return }
