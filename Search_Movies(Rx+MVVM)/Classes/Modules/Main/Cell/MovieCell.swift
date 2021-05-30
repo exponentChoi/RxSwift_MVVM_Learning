@@ -20,8 +20,8 @@ class MovieCell: UICollectionViewCell {
         super.awakeFromNib()
 //        // Initialization code
         
-        contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.lightGray.cgColor
+//        contentView.layer.borderWidth = 1
+//        contentView.layer.borderColor = UIColor.lightGray.cgColor
     }
     
 //    override func prepareForReuse() {

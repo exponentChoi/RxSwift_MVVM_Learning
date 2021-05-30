@@ -32,7 +32,7 @@ class MainVC: BaseViewController {
         let movieCell = UINib(nibName: "MovieCell", bundle: nil)
         moviesCollectionView.register(movieCell, forCellWithReuseIdentifier: MovieCell.identifier)
         
-//        moviesCollectionView.rx.setDelegate(self)
+        _ = moviesCollectionView.rx.setDelegate(self)
         moviesCollectionView.collectionViewLayout = setCollectionViewLayout()
 //        moviesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 1, bottom: 0, right: 1)
     }
@@ -102,8 +102,6 @@ class MainVC: BaseViewController {
             }
         }.disposed(by: disposeBag)
         
-        
-        
 //        if let recently_item = myUserDefault.object(forKey: "Recently_Search") as? [MovieModel] {
 //            viewModel.movies.accept(recently_item)
 //        }
@@ -160,8 +158,22 @@ extension MainVC: UISearchBarDelegate {
 
 // MARK: - collectionView Delegate
 extension MainVC: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width
-        return CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width = UIScreen.main.bounds.width
+//        return CGSize(width: (width / 3) - 4, height: (width / 3) + 20)
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        guard let row = collectionView.cellForItem(at: indexPath) as? MovieCell else { return }
+        UIView.animate(withDuration: 0.1, animations: {
+            row.contentView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        })
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        guard let row = collectionView.cellForItem(at: indexPath) as? MovieCell else { return }
+        UIView.animate(withDuration: 0.3) {
+            row.contentView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
     }
 }
